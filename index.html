@@ -100,41 +100,61 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 40px 60px 0;
+    padding: 16px 0 0;
     position: relative;
     overflow: hidden;
+    min-height: 0;
   }
 
-  /* optional video background */
+  .hero-video-block {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    margin: 0 60px;
+    border-radius: 2px;
+  }
   .hero-video {
-    position: absolute;
-    inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
-    opacity: 0.07;
-    pointer-events: none;
+    display: block;
   }
-
+  /* dark overlay so text reads on top */
+  .hero-video-block::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(20,16,12,.25) 0%,
+      rgba(20,16,12,.55) 100%
+    );
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px 40px;
+  }
   .room-label {
-    font-size: clamp(12px, 1.6vw, 16px);
+    font-size: clamp(11px, 1.4vw, 14px);
     font-weight: 400;
     letter-spacing: 0.5em;
     text-transform: uppercase;
-    color: var(--wood);
-    margin-bottom: 10px;
-    position: relative;
+    color: rgba(255,255,255,.7);
+    margin-bottom: 4px;
   }
-
   .room-num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(200px, 30vw, 420px);
+    font-size: clamp(140px, 22vw, 300px);
     font-weight: 200;
     line-height: 0.85;
     letter-spacing: -0.04em;
-    color: var(--wood-deep);
-    margin-left: -8px;
-    position: relative;
+    color: #fff;
+    margin-left: -6px;
+    text-shadow: 0 4px 40px rgba(0,0,0,.3);
   }
 
   /* ======== META ROW ======== */
@@ -374,13 +394,19 @@
     </div>
   </header>
 
-  <!-- HERO (room number) -->
+  <!-- HERO (video + room number overlay) -->
   <section class="hero">
-    <!-- Optional: add a video here -->
-    <!-- <video class="hero-video" src="your-video.mp4" autoplay loop muted playsinline></video> -->
-
-    <div class="room-label">Cabinet · Кабінет</div>
-    <div class="room-num">237</div>
+    <div class="hero-video-block">
+      <video
+        class="hero-video"
+        src="https://videos.pexels.com/video-files/6248837/6248837-hd_1920_1080_30fps.mp4"
+        autoplay loop muted playsinline
+      ></video>
+      <div class="hero-overlay">
+        <div class="room-label">Cabinet · Кабінет</div>
+        <div class="room-num">237</div>
+      </div>
+    </div>
   </section>
 
   <!-- META ROW: room name + doctor -->
