@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>02 · Кабінет 237 — Мармуровий Палац</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,400;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2A2520;
+    --ink-soft: #5C5247;
+    --ink-mute: #8C8175;
+    --wood-deep: #4A3A2C;
+    --wood: #6E5640;
+    --wood-darker: #2A2018;
+    --brass: #C7A66B;
+    --brass-deep: #8C7142;
+    --taupe: #C9BDA9;
+    --taupe-deep: #8E7E68;
+    --cream: #EFE8DC;
+    --cream-soft: #F6F1E7;
+    --sage: #7B8B6C;
+    --sage-soft: #A6B392;
+    --sage-deep: #5A6A4E;
+    --free: #6E8A57;
+    --busy: #B26A4F;
+    --line: rgba(60,48,38,.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+  }
+
+  /* ---- ROOT LAYOUT (vertical 1080×1920 or fills tablet) ---- */
+  .screen {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: var(--cream);
+  }
+
+  /* ======== HEADER ======== */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 36px 60px 28px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    z-index: 10;
+  }
+  .logo-block { display: flex; flex-direction: column; gap: 6px; }
+  .logo-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--wood-deep);
+  }
+  .logo-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(9px, 1.2vw, 12px);
+    font-weight: 300;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .floor-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    color: var(--wood);
+    font-size: clamp(11px, 1.4vw, 14px);
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+  .floor-meta .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--wood-deep);
+  }
+
+  /* ======== HERO ======== */
+  .hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 60px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* optional video background */
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+
+  .room-label {
+    font-size: clamp(12px, 1.6vw, 16px);
+    font-weight: 400;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--wood);
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .room-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(200px, 30vw, 420px);
+    font-weight: 200;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: var(--wood-deep);
+    margin-left: -8px;
+    position: relative;
+  }
+
+  /* ======== META ROW ======== */
+  .meta-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-top: 1px solid var(--line);
+    padding: 28px 0 0;
+    margin: 28px 60px 0;
+    position: relative;
+  }
+
+  .room-name-block {}
+  .room-name-ua {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5.5vw, 60px);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.05;
+    max-width: 560px;
+  }
+  .room-name-en {
+    display: block;
+    margin-top: 14px;
+    font-size: clamp(12px, 1.6vw, 18px);
+    font-weight: 300;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--wood);
+  }
+
+  .doctor-block {
+    text-align: right;
+  }
+  .doctor-label {
+    font-size: clamp(9px, 1.1vw, 13px);
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--wood);
+    font-weight: 300;
+    margin-bottom: 8px;
+  }
+  .doctor-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 2.8vw, 28px);
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  /* ======== AD BANNER ======== */
+  .ad-section {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 20px;
+    margin: 28px 60px 0;
+    height: clamp(240px, 25vh, 320px);
+    position: relative;
+  }
+
+  .ad-box {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .ad-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 36px;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .ad-slide.on { opacity: 1; }
+  .ad-slide:nth-child(1) { background: linear-gradient(135deg, #3a3a30 0%, #5a6a4e 100%); }
+  .ad-slide:nth-child(2) { background: linear-gradient(135deg, #4a3a2c 0%, #8e7e68 100%); }
+  .ad-slide:nth-child(3) { background: linear-gradient(135deg, #2a2520 0%, #6e5640 100%); }
+  .ad-tag {
+    font-size: 13px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--sage-soft);
+    margin-bottom: 14px;
+  }
+  .ad-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  .ad-body {
+    font-size: clamp(14px, 1.8vw, 18px);
+    font-weight: 300;
+    color: rgba(255,255,255,.75);
+    line-height: 1.5;
+  }
+  .ad-dots {
+    position: absolute;
+    bottom: 24px; left: 36px;
+    display: flex; gap: 10px;
+  }
+  .ad-dots span {
+    display: block;
+    height: 8px; border-radius: 4px;
+    background: rgba(255,255,255,.3);
+    transition: all .3s ease;
+  }
+  .ad-dots span.on { width: 28px; background: var(--sage-soft); }
+  .ad-dots span:not(.on) { width: 8px; }
+
+  /* right col = status + QR */
+  .right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.3);
+  }
+  .status-label {
+    font-size: 11px; letter-spacing: 0.42em; text-transform: uppercase;
+    color: var(--wood); font-weight: 300;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fff;
+    align-self: flex-start;
+  }
+  .status-pill.free { background: var(--free); }
+  .status-pill.busy { background: var(--busy); }
+  .status-dot {
+    width: 11px; height: 11px;
+    border-radius: 50%; background: #fff;
+    box-shadow: 0 0 0 0 rgba(255,255,255,.5);
+    animation: pulse 1.8s ease-out infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(255,255,255,.55); }
+    70%  { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
+    100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  }
+  .qr-wrap { display: flex; align-items: center; gap: 14px; margin-top: auto; }
+  .qr-img {
+    width: 80px; height: 80px;
+    border: 1px solid var(--brass-deep);
+    background: #fff;
+    /* checkerboard QR placeholder */
+    background-image: repeating-conic-gradient(var(--ink) 0deg 25%, transparent 0deg 50%);
+    background-size: 12px 12px;
+    flex-shrink: 0;
+  }
+  .qr-text { font-size: 13px; color: var(--wood); line-height: 1.5; letter-spacing: 0.04em; }
+  .qr-text strong { display: block; font-size: 14px; color: var(--ink); font-weight: 500; margin-bottom: 2px; }
+
+  /* ======== TICKER ======== */
+  .ticker-wrap {
+    height: 52px;
+    background: var(--wood-deep);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+  }
+  .ticker-track {
+    display: block;
+    white-space: nowrap;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: #F5EFE0;
+    padding-left: 100%;
+    animation: tick 40s linear infinite;
+  }
+  .ticker-track span {
+    display: inline-block;
+    margin: 0 48px;
+  }
+  @keyframes tick {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ======== FOOTER ======== */
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 60px 28px;
+    border-top: 1px solid var(--line);
+    font-size: 16px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 300;
+    flex-shrink: 0;
+  }
+  .clock {
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-block">
+      <div class="logo-name">Мармуровий Палац</div>
+      <div class="logo-sub">Marble Palace · Med</div>
+    </div>
+    <div class="floor-meta">
+      <span>Floor</span>
+      <span class="num">02</span>
+      <span>·</span>
+      <span>Wing East</span>
+    </div>
+  </header>
+
+  <!-- HERO (room number) -->
+  <section class="hero">
+    <!-- Optional: add a video here -->
+    <!-- <video class="hero-video" src="your-video.mp4" autoplay loop muted playsinline></video> -->
+
+    <div class="room-label">Cabinet · Кабінет</div>
+    <div class="room-num">237</div>
+  </section>
+
+  <!-- META ROW: room name + doctor -->
+  <div class="meta-row">
+    <div class="room-name-block">
+      <div class="room-name-ua">Кабінет лікаря<br>гінеколога</div>
+      <span class="room-name-en">Gynecologist's office</span>
+    </div>
+    <div class="doctor-block">
+      <div class="doctor-label">Прийом веде</div>
+      <div class="doctor-name">Ковальчук І. М.</div>
+    </div>
+  </div>
+
+  <!-- AD + STATUS -->
+  <div class="ad-section">
+    <!-- Ad carousel -->
+    <div class="ad-box">
+      <div class="ad-slide on">
+        <div class="ad-tag">SPA · Травень</div>
+        <div class="ad-title">Ритуал відновлення</div>
+        <div class="ad-body">Курс із 5 процедур ароматерапії та глибокого зволоження — знижка 20% до кінця місяця</div>
+      </div>
+      <div class="ad-slide">
+        <div class="ad-tag">Нова послуга</div>
+        <div class="ad-title">Колоногідротерапія</div>
+        <div class="ad-body">Сучасна методика очищення з контролем фахівця. Запис у реєстратурі або онлайн.</div>
+      </div>
+      <div class="ad-slide">
+        <div class="ad-tag">Чек-ап</div>
+        <div class="ad-title">Жіноче здоров'я</div>
+        <div class="ad-body">Комплексне обстеження за один день. Лабораторія + УЗД + консультація.</div>
+      </div>
+      <div class="ad-dots">
+        <span class="on"></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Status + QR -->
+    <div class="right-col">
+      <div class="status-label">Статус прийому</div>
+      <div class="status-pill free">
+        <span class="status-dot"></span>
+        Вільно
+      </div>
+      <div class="status-label" style="margin-top:auto">Запис онлайн</div>
+      <div class="qr-wrap">
+        <div class="qr-img"></div>
+        <div class="qr-text">
+          <strong>Скануйте</strong>
+          marblepalace.ua/237
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span>Реєстратура: 1 поверх, кабінет 010</span>
+      <span>·</span>
+      <span>Безкоштовний Wi-Fi: MarblePalace_Guest</span>
+      <span>·</span>
+      <span>Гарячі напої та вода — у зоні очікування</span>
+      <span>·</span>
+      <span>Виклик персоналу — кнопка біля рецепції</span>
+      <span>·</span>
+      <span>Реєстратура: 1 поверх, кабінет 010</span>
+      <span>·</span>
+      <span>Безкоштовний Wi-Fi: MarblePalace_Guest</span>
+      <span>·</span>
+      <span>Гарячі напої та вода — у зоні очікування</span>
+      <span>·</span>
+      <span>Виклик персоналу — кнопка біля рецепції</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>marblepalace.ua</span>
+    <span class="clock" id="clock">--:--</span>
+  </footer>
+</div>
+
+<script>
+  // ---- Clock ----
+  function updateClock() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const months = ['січня','лютого','березня','квітня','травня','червня',
+                    'липня','серпня','вересня','жовтня','листопада','грудня'];
+    const d = now.getDate();
+    const mon = months[now.getMonth()];
+    document.getElementById('clock').textContent = `${h}:${m} · ${d} ${mon}`;
+  }
+  updateClock();
+  setInterval(updateClock, 10000);
+
+  // ---- Ad slideshow ----
+  const slides = document.querySelectorAll('.ad-slide');
+  const dots   = document.querySelectorAll('.ad-dots span');
+  let cur = 0;
+  function nextSlide() {
+    slides[cur].classList.remove('on');
+    dots[cur].classList.remove('on');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('on');
+    dots[cur].classList.add('on');
+  }
+  setInterval(nextSlide, 6000);
+</script>
+</body>
+</html>
