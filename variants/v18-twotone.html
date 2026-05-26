@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>237 · Two-Tone</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;1,200;1,300&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif}
+.screen{display:flex;flex-direction:column;width:100vw;height:100vh}
+
+/* TOP DARK ZONE - ~60% */
+.top{background:#1A1208;flex:0 0 60%;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+/* subtle texture */
+.top::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(199,166,107,.02) 0,rgba(199,166,107,.02) 1px,transparent 1px,transparent 8px);pointer-events:none}
+
+.top-header{display:flex;justify-content:space-between;padding:30px 52px 0;position:relative}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2.2vw,20px);font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:#C7A66B}
+.logo-sub{font-size:8px;font-weight:200;letter-spacing:.4em;text-transform:uppercase;color:rgba(199,166,107,.35);margin-top:3px}
+.floor-row{display:flex;align-items:baseline;gap:8px;color:rgba(199,166,107,.4);font-size:9px;letter-spacing:.4em;text-transform:uppercase}
+.floor-row strong{font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;font-weight:200;letter-spacing:0;color:#C7A66B}
+
+.top-content{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 52px 32px;position:relative}
+.room-tag{font-size:8px;letter-spacing:.6em;text-transform:uppercase;color:rgba(199,166,107,.4);margin-bottom:4px}
+.room-num{font-family:'Cormorant Garamond',serif;font-size:clamp(150px,24vw,300px);font-weight:200;line-height:.82;letter-spacing:-.04em;color:#fff;margin-left:-6px}
+
+/* diagonal cut */
+.cut{width:100%;height:40px;background:#F0EAE0;clip-path:polygon(0 100%,100% 0,100% 100%);flex-shrink:0}
+
+/* BOTTOM LIGHT ZONE */
+.bottom{background:#F0EAE0;flex:1;display:flex;flex-direction:column;min-height:0}
+
+.bottom-top{padding:0 52px 20px;flex-shrink:0}
+.room-name{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.8vw,46px);font-style:italic;font-weight:300;color:#1A1208;line-height:1.1}
+.room-en{font-family:'Inter',sans-serif;font-style:normal;font-size:8px;letter-spacing:.42em;text-transform:uppercase;color:#8C7142;display:block;margin-top:8px}
+
+.mid-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 52px;background:#fff;border-top:1px solid rgba(26,18,8,.1);border-bottom:1px solid rgba(26,18,8,.1);flex-shrink:0}
+.doc-block{}
+.doc-label{font-size:7px;letter-spacing:.44em;text-transform:uppercase;color:#8C7142;margin-bottom:4px}
+.doc-name{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.6vw,26px);font-weight:300;color:#1A1208}
+.status-pill{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;background:#1A1208;color:#8EBA6A;font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+.dot{width:8px;height:8px;border-radius:50%;background:#8EBA6A;animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* VIDEO STRIP */
+.video-strip{flex:1;position:relative;overflow:hidden;min-height:0}
+.video-strip video{width:100%;height:100%;object-fit:cover}
+.video-strip::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(240,234,224,.9) 0%,rgba(240,234,224,.3) 45%,transparent 70%)}
+.vs-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:16px 52px;z-index:2}
+.ad-stack{max-width:55%}
+.vs-tag{font-size:7px;letter-spacing:.42em;text-transform:uppercase;color:#8C7142;margin-bottom:4px}
+.vs-title{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.4vw,26px);font-style:italic;font-weight:300;color:#1A1208;line-height:1.15}
+
+/* TICKER */
+.ticker{height:34px;background:#1A1208;overflow:hidden;display:flex;align-items:center;flex-shrink:0}
+.ticker-inner{white-space:nowrap;font-size:10px;font-weight:200;letter-spacing:.14em;color:rgba(199,166,107,.55);padding-left:100%;animation:tick 38s linear infinite}
+.ticker-inner span{margin:0 32px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.footer{display:flex;justify-content:space-between;padding:10px 52px 16px;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,234,224,.25);flex-shrink:0;background:#1A1208}
+.clock{color:rgba(199,166,107,.4);font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="top">
+    <div class="top-header">
+      <div><div class="logo-name">Мармуровий Палац</div><div class="logo-sub">Marble Palace · Med</div></div>
+      <div class="floor-row"><span>Floor</span><strong>02</strong><span>· East</span></div>
+    </div>
+    <div class="top-content">
+      <div class="room-tag">Cabinet · Кабінет</div>
+      <div class="room-num">237</div>
+    </div>
+  </div>
+  <div class="cut"></div>
+
+  <div class="bottom">
+    <div class="bottom-top">
+      <div class="room-name">Кабінет лікаря гінеколога<span class="room-en">Gynecologist's Office</span></div>
+    </div>
+    <div class="mid-bar">
+      <div class="doc-block"><div class="doc-label">Прийом веде</div><div class="doc-name">Ковальчук І. М.</div></div>
+      <div class="status-pill"><span class="dot"></span>Вільно</div>
+    </div>
+    <div class="video-strip">
+      <video src="https://videos.pexels.com/video-files/6248837/6248837-hd_1920_1080_30fps.mp4" autoplay loop muted playsinline></video>
+      <div class="vs-overlay">
+        <div class="ad-stack">
+          <div class="vs-tag" id="adTag">SPA · Травень</div>
+          <div class="vs-title" id="adTitle">Ритуал відновлення</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>Реєстратура: 1 поверх, кабінет 010</span><span>·</span><span>Wi-Fi: MarblePalace_Guest</span><span>·</span><span>Гарячі напої у зоні очікування</span><span>·</span>
+      <span>Реєстратура: 1 поверх, кабінет 010</span><span>·</span><span>Wi-Fi: MarblePalace_Guest</span><span>·</span><span>Гарячі напої у зоні очікування</span><span>·</span>
+    </div>
+  </div>
+  <footer class="footer"><span>marblepalace.ua</span><span class="clock" id="clock">--:--</span></footer>
+</div>
+<script>
+const ads=[{tag:'SPA · Травень',title:'Ритуал відновлення'},{tag:'Нова послуга',title:'Колоногідротерапія'},{tag:'Чек-ап',title:'Жіноче здоров\'я'}];
+let c=0;setInterval(()=>{c=(c+1)%ads.length;document.getElementById('adTag').textContent=ads[c].tag;document.getElementById('adTitle').textContent=ads[c].title},6000);
+function tick(){const n=new Date(),h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0'),months=['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];document.getElementById('clock').textContent=`${h}:${m} · ${n.getDate()} ${months[n.getMonth()]}`}
+tick();setInterval(tick,10000);
+</script>
+
+<!-- Variant Switcher -->
+<button id="vswBtn" aria-label="Switcher">⊞</button>
+<div id="vswPanel">
+  <div style="padding:16px 20px;border-bottom:1px solid rgba(200,180,140,.2);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(200,180,140,.6)">Варіанти дизайну</div>
+  <div style="overflow-y:auto;max-height:calc(70vh - 60px)">
+    <a href="/index.html" data-path="/index.html"><span>00</span>Оригінал</a>
+    <a href="/variants/v1-dark-luxury.html" data-path="/variants/v1-dark-luxury.html"><span>01</span>Dark Luxury</a>
+    <a href="/variants/v2-fullbleed-video.html" data-path="/variants/v2-fullbleed-video.html"><span>02</span>Full-bleed відео</a>
+    <a href="/variants/v3-split-layout.html" data-path="/variants/v3-split-layout.html"><span>03</span>Split ліво/право</a>
+    <a href="/variants/v4-ultra-minimal.html" data-path="/variants/v4-ultra-minimal.html"><span>04</span>Ultra Minimal</a>
+    <a href="/variants/v5-video-top.html" data-path="/variants/v5-video-top.html"><span>05</span>Відео зверху</a>
+    <a href="/variants/v6-sage-natural.html" data-path="/variants/v6-sage-natural.html"><span>06</span>Sage зелений</a>
+    <a href="/variants/v7-corporate-blue.html" data-path="/variants/v7-corporate-blue.html"><span>07</span>Corporate Blue</a>
+    <a href="/variants/v8-centered-video.html" data-path="/variants/v8-centered-video.html"><span>08</span>Centered відео</a>
+    <a href="/variants/v9-terracotta.html" data-path="/variants/v9-terracotta.html"><span>09</span>Terracotta</a>
+    <a href="/variants/v10-bands.html" data-path="/variants/v10-bands.html"><span>10</span>Bands смуги</a>
+    <a href="/variants/v11-editorial.html" data-path="/variants/v11-editorial.html"><span>11</span>Editorial</a>
+    <a href="/variants/v12-brutalist.html" data-path="/variants/v12-brutalist.html"><span>12</span>Brutalist</a>
+    <a href="/variants/v13-glassmorphism.html" data-path="/variants/v13-glassmorphism.html"><span>13</span>Glassmorphism</a>
+    <a href="/variants/v14-ink-paper.html" data-path="/variants/v14-ink-paper.html"><span>14</span>Ink Paper</a>
+    <a href="/variants/v15-bento.html" data-path="/variants/v15-bento.html"><span>15</span>Bento Grid</a>
+    <a href="/variants/v16-framed.html" data-path="/variants/v16-framed.html"><span>16</span>Framed рамка</a>
+    <a href="/variants/v17-neon-dark.html" data-path="/variants/v17-neon-dark.html"><span>17</span>Neon Dark</a>
+    <a href="/variants/v18-twotone.html" data-path="/variants/v18-twotone.html"><span>18</span>Two-tone</a>
+    <a href="/variants/v19-poster.html" data-path="/variants/v19-poster.html"><span>19</span>Poster</a>
+    <a href="/variants/v20-rotating-slides.html" data-path="/variants/v20-rotating-slides.html"><span>20</span>Rotating Slides</a>
+  </div>
+</div>
+<style>
+#vswBtn{position:fixed;bottom:72px;right:16px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(28,22,14,.8);backdrop-filter:blur(8px);color:#C7A66B;font-size:22px;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;transition:all .2s ease;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+#vswBtn:hover{background:rgba(28,22,14,.95);transform:scale(1.05)}
+#vswPanel{position:fixed;bottom:124px;right:16px;width:260px;background:rgba(28,22,14,.95);backdrop-filter:blur(16px);border-radius:6px;z-index:99998;display:none;box-shadow:0 4px 24px rgba(0,0,0,.5)}
+#vswPanel.show{display:block}
+#vswPanel a{display:flex;align-items:center;gap:14px;padding:12px 20px;color:#E5DCC8;text-decoration:none;font-size:14px;transition:background .2s ease;border-bottom:1px solid rgba(200,180,140,.08)}
+#vswPanel a:hover{background:rgba(199,166,107,.15)}
+#vswPanel a.active{background:rgba(199,166,107,.25);color:#C7A66B}
+#vswPanel a span{display:inline-block;min-width:24px;font-size:11px;color:rgba(200,180,140,.5);font-variant-numeric:tabular-nums}
+#vswPanel a.active span{color:#C7A66B;font-weight:600}
+</style>
+<script>
+(function(){
+const btn=document.getElementById('vswBtn');
+const panel=document.getElementById('vswPanel');
+if(!btn||!panel)return;
+btn.addEventListener('click',function(e){
+  e.stopPropagation();
+  panel.classList.toggle('show');
+});
+document.addEventListener('click',function(e){
+  if(!panel.contains(e.target)&&e.target!==btn){
+    panel.classList.remove('show');
+  }
+});
+const path=location.pathname;
+document.querySelectorAll('#vswPanel a').forEach(function(a){
+  const href=a.getAttribute('data-path');
+  if(path===href||(path==='/'&&href==='/index.html')){
+    a.classList.add('active');
+  }
+});
+})();
+</script>
+
+</body>
+</html>

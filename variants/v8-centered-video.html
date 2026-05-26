@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>237 · Centered</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;1,200;1,300&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif}
+.screen{position:relative;width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+
+/* VIDEO BG with stronger overlay */
+.vbg{position:fixed;inset:0;z-index:0}
+.vbg video{width:100%;height:100%;object-fit:cover}
+.vbg::after{content:'';position:absolute;inset:0;background:rgba(14,10,6,.78)}
+
+.content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%;padding:0 60px;color:#F0E8DC}
+
+.top-line{width:1px;height:60px;background:linear-gradient(transparent,rgba(199,166,107,.5));margin-bottom:24px}
+.eyebrow{font-size:9px;letter-spacing:.65em;text-transform:uppercase;color:rgba(199,166,107,.6);margin-bottom:8px}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.4vw,22px);font-weight:300;letter-spacing:.28em;text-transform:uppercase;color:#C7A66B;margin-bottom:40px}
+
+.divider-h{width:60px;height:1px;background:rgba(199,166,107,.4);margin:0 auto 16px}
+
+.floor-txt{font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:rgba(240,232,220,.4);margin-bottom:24px}
+
+.room-tag{font-size:9px;letter-spacing:.6em;text-transform:uppercase;color:rgba(199,166,107,.6);margin-bottom:4px}
+.room-num{font-family:'Cormorant Garamond',serif;font-size:clamp(180px,30vw,380px);font-weight:200;line-height:.82;letter-spacing:-.05em;color:#fff;text-shadow:0 0 80px rgba(199,166,107,.2)}
+
+.divider-h2{width:120px;height:1px;background:rgba(240,232,220,.15);margin:20px auto}
+
+.room-name{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.5vw,40px);font-style:italic;font-weight:300;color:rgba(240,232,220,.9);line-height:1.15}
+.room-en{display:block;font-family:'Inter',sans-serif;font-style:normal;font-size:8px;letter-spacing:.45em;text-transform:uppercase;color:rgba(199,166,107,.5);margin-top:10px}
+
+.divider-h3{width:60px;height:1px;background:rgba(240,232,220,.15);margin:20px auto}
+
+.doc-block{margin-bottom:20px}
+.doc-label{font-size:8px;letter-spacing:.44em;text-transform:uppercase;color:rgba(240,232,220,.4);margin-bottom:6px}
+.doc-name{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.8vw,28px);font-weight:300;color:rgba(240,232,220,.85)}
+
+.status-cent{display:inline-flex;align-items:center;gap:10px;padding:10px 24px;border:1px solid rgba(110,138,87,.4);color:#9DC472;font-size:10px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:28px}
+.dot{width:7px;height:7px;border-radius:50%;background:#9DC472;animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+
+.bottom-line{width:1px;height:50px;background:linear-gradient(rgba(199,166,107,.4),transparent)}
+
+/* TICKER & FOOTER positioned at screen bottom */
+.bottom-fixed{position:fixed;bottom:0;left:0;right:0;z-index:3}
+.ticker{height:36px;background:rgba(10,8,6,.7);backdrop-filter:blur(8px);overflow:hidden;display:flex;align-items:center}
+.ticker-inner{white-space:nowrap;font-size:11px;font-weight:200;letter-spacing:.14em;color:rgba(199,166,107,.5);padding-left:100%;animation:tick 38s linear infinite}
+.ticker-inner span{margin:0 36px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.footer{background:rgba(10,8,6,.6);backdrop-filter:blur(8px);display:flex;justify-content:space-between;padding:10px 48px 18px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,232,220,.25)}
+.clock{color:rgba(199,166,107,.5);font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="vbg">
+    <video src="https://videos.pexels.com/video-files/6248837/6248837-hd_1920_1080_30fps.mp4" autoplay loop muted playsinline></video>
+  </div>
+  <div class="content">
+    <div class="top-line"></div>
+    <div class="eyebrow">Marble Palace · Med</div>
+    <div class="logo-name">Мармуровий Палац</div>
+    <div class="floor-txt">Floor 02 · Wing East</div>
+    <div class="divider-h"></div>
+    <div class="room-tag">Cabinet · Кабінет</div>
+    <div class="room-num">237</div>
+    <div class="divider-h2"></div>
+    <div class="room-name">Кабінет лікаря гінеколога<span class="room-en">Gynecologist's Office</span></div>
+    <div class="divider-h3"></div>
+    <div class="doc-block">
+      <div class="doc-label">Прийом веде</div>
+      <div class="doc-name">Ковальчук І. М.</div>
+    </div>
+    <div class="status-cent"><span class="dot"></span>Вільно</div>
+    <div class="bottom-line"></div>
+  </div>
+</div>
+<div class="bottom-fixed">
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>Реєстратура: 1 поверх, кабінет 010</span><span>·</span><span>Wi-Fi: MarblePalace_Guest</span><span>·</span><span>Гарячі напої у зоні очікування</span><span>·</span>
+      <span>Реєстратура: 1 поверх, кабінет 010</span><span>·</span><span>Wi-Fi: MarblePalace_Guest</span><span>·</span><span>Гарячі напої у зоні очікування</span><span>·</span>
+    </div>
+  </div>
+  <div class="footer"><span>marblepalace.ua</span><span class="clock" id="clock">--:--</span></div>
+</div>
+<script>
+function tick(){const n=new Date(),h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0'),months=['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];document.getElementById('clock').textContent=`${h}:${m} · ${n.getDate()} ${months[n.getMonth()]}`}
+tick();setInterval(tick,10000);
+</script>
+
+<!-- Variant Switcher -->
+<button id="vswBtn" aria-label="Switcher">⊞</button>
+<div id="vswPanel">
+  <div style="padding:16px 20px;border-bottom:1px solid rgba(200,180,140,.2);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(200,180,140,.6)">Варіанти дизайну</div>
+  <div style="overflow-y:auto;max-height:calc(70vh - 60px)">
+    <a href="/index.html" data-path="/index.html"><span>00</span>Оригінал</a>
+    <a href="/variants/v1-dark-luxury.html" data-path="/variants/v1-dark-luxury.html"><span>01</span>Dark Luxury</a>
+    <a href="/variants/v2-fullbleed-video.html" data-path="/variants/v2-fullbleed-video.html"><span>02</span>Full-bleed відео</a>
+    <a href="/variants/v3-split-layout.html" data-path="/variants/v3-split-layout.html"><span>03</span>Split ліво/право</a>
+    <a href="/variants/v4-ultra-minimal.html" data-path="/variants/v4-ultra-minimal.html"><span>04</span>Ultra Minimal</a>
+    <a href="/variants/v5-video-top.html" data-path="/variants/v5-video-top.html"><span>05</span>Відео зверху</a>
+    <a href="/variants/v6-sage-natural.html" data-path="/variants/v6-sage-natural.html"><span>06</span>Sage зелений</a>
+    <a href="/variants/v7-corporate-blue.html" data-path="/variants/v7-corporate-blue.html"><span>07</span>Corporate Blue</a>
+    <a href="/variants/v8-centered-video.html" data-path="/variants/v8-centered-video.html"><span>08</span>Centered відео</a>
+    <a href="/variants/v9-terracotta.html" data-path="/variants/v9-terracotta.html"><span>09</span>Terracotta</a>
+    <a href="/variants/v10-bands.html" data-path="/variants/v10-bands.html"><span>10</span>Bands смуги</a>
+    <a href="/variants/v11-editorial.html" data-path="/variants/v11-editorial.html"><span>11</span>Editorial</a>
+    <a href="/variants/v12-brutalist.html" data-path="/variants/v12-brutalist.html"><span>12</span>Brutalist</a>
+    <a href="/variants/v13-glassmorphism.html" data-path="/variants/v13-glassmorphism.html"><span>13</span>Glassmorphism</a>
+    <a href="/variants/v14-ink-paper.html" data-path="/variants/v14-ink-paper.html"><span>14</span>Ink Paper</a>
+    <a href="/variants/v15-bento.html" data-path="/variants/v15-bento.html"><span>15</span>Bento Grid</a>
+    <a href="/variants/v16-framed.html" data-path="/variants/v16-framed.html"><span>16</span>Framed рамка</a>
+    <a href="/variants/v17-neon-dark.html" data-path="/variants/v17-neon-dark.html"><span>17</span>Neon Dark</a>
+    <a href="/variants/v18-twotone.html" data-path="/variants/v18-twotone.html"><span>18</span>Two-tone</a>
+    <a href="/variants/v19-poster.html" data-path="/variants/v19-poster.html"><span>19</span>Poster</a>
+    <a href="/variants/v20-rotating-slides.html" data-path="/variants/v20-rotating-slides.html"><span>20</span>Rotating Slides</a>
+  </div>
+</div>
+<style>
+#vswBtn{position:fixed;bottom:72px;right:16px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(28,22,14,.8);backdrop-filter:blur(8px);color:#C7A66B;font-size:22px;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;transition:all .2s ease;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+#vswBtn:hover{background:rgba(28,22,14,.95);transform:scale(1.05)}
+#vswPanel{position:fixed;bottom:124px;right:16px;width:260px;background:rgba(28,22,14,.95);backdrop-filter:blur(16px);border-radius:6px;z-index:99998;display:none;box-shadow:0 4px 24px rgba(0,0,0,.5)}
+#vswPanel.show{display:block}
+#vswPanel a{display:flex;align-items:center;gap:14px;padding:12px 20px;color:#E5DCC8;text-decoration:none;font-size:14px;transition:background .2s ease;border-bottom:1px solid rgba(200,180,140,.08)}
+#vswPanel a:hover{background:rgba(199,166,107,.15)}
+#vswPanel a.active{background:rgba(199,166,107,.25);color:#C7A66B}
+#vswPanel a span{display:inline-block;min-width:24px;font-size:11px;color:rgba(200,180,140,.5);font-variant-numeric:tabular-nums}
+#vswPanel a.active span{color:#C7A66B;font-weight:600}
+</style>
+<script>
+(function(){
+const btn=document.getElementById('vswBtn');
+const panel=document.getElementById('vswPanel');
+if(!btn||!panel)return;
+btn.addEventListener('click',function(e){
+  e.stopPropagation();
+  panel.classList.toggle('show');
+});
+document.addEventListener('click',function(e){
+  if(!panel.contains(e.target)&&e.target!==btn){
+    panel.classList.remove('show');
+  }
+});
+const path=location.pathname;
+document.querySelectorAll('#vswPanel a').forEach(function(a){
+  const href=a.getAttribute('data-path');
+  if(path===href||(path==='/'&&href==='/index.html')){
+    a.classList.add('active');
+  }
+});
+})();
+</script>
+
+</body>
+</html>

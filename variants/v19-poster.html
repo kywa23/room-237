@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>237 · Poster</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;0,600;1,200;1,400;1,600&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#E8E2D8;font-family:'Inter',sans-serif;color:#1C1810}
+.screen{display:flex;flex-direction:column;width:100vw;height:100vh}
+
+/* FULL-HEIGHT POSTER */
+.poster{flex:1;display:grid;grid-template-rows:auto 1fr auto;min-height:0;background:#E8E2D8;position:relative;overflow:hidden}
+
+/* BIG BACKGROUND TEXT */
+.bg-word{position:absolute;bottom:-30px;left:-10px;right:0;font-family:'Cormorant Garamond',serif;font-size:clamp(200px,35vw,500px);font-weight:600;font-style:italic;color:rgba(28,24,16,.05);line-height:.75;letter-spacing:-.04em;pointer-events:none;white-space:nowrap;overflow:hidden}
+
+/* TOP */
+.p-top{display:flex;justify-content:space-between;align-items:flex-start;padding:36px 52px 0;position:relative}
+.p-logo{font-family:'Cormorant Garamond',serif;font-size:clamp(13px,2vw,19px);font-weight:300;letter-spacing:.24em;text-transform:uppercase;color:#1C1810}
+.p-logo em{font-family:'Inter',sans-serif;font-style:normal;font-size:7px;letter-spacing:.44em;text-transform:uppercase;color:rgba(28,24,16,.35);display:block;margin-top:4px}
+.p-floor{font-size:9px;letter-spacing:.38em;text-transform:uppercase;color:rgba(28,24,16,.35);text-align:right}
+.p-floor strong{display:block;font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;font-weight:300;letter-spacing:0;color:#1C1810;margin-top:2px}
+
+/* MIDDLE - giant poster content */
+.p-mid{display:flex;flex-direction:column;justify-content:center;padding:0 52px;position:relative}
+/* horizontal rule with ornament */
+.ruled{display:flex;align-items:center;gap:16px;margin-bottom:10px}
+.ruled-line{flex:1;height:1px;background:rgba(28,24,16,.2)}
+.ruled-text{font-size:8px;letter-spacing:.65em;text-transform:uppercase;color:rgba(28,24,16,.4)}
+
+.num-and-name{display:flex;align-items:flex-end;gap:24px;flex-wrap:nowrap}
+.room-num{font-family:'Cormorant Garamond',serif;font-size:clamp(150px,24vw,300px);font-weight:200;line-height:.82;letter-spacing:-.04em;color:#1C1810;flex-shrink:0;margin-left:-5px}
+.name-stack{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:12px;gap:4px}
+.ns-divider{width:2px;height:48px;background:#1C1810;margin-bottom:8px}
+.room-name-ua{font-family:'Cormorant Garamond',serif;font-size:clamp(14px,2.2vw,24px);font-style:italic;font-weight:300;color:#1C1810;line-height:1.2}
+.room-name-en{font-size:7px;font-weight:200;letter-spacing:.4em;text-transform:uppercase;color:rgba(28,24,16,.4)}
+
+.ruled2{display:flex;align-items:center;gap:16px;margin-top:10px}
+.ruled2 .ruled-line{flex:1;height:1px;background:rgba(28,24,16,.15)}
+.ruled2 .ruled-text{font-size:8px;letter-spacing:.5em;text-transform:uppercase;color:rgba(28,24,16,.35)}
+
+/* BOTTOM */
+.p-bot{padding:0 52px 0;position:relative}
+
+.info-strip{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-top:1px solid rgba(28,24,16,.15);border-bottom:1px solid rgba(28,24,16,.15)}
+.doc-label{font-size:7px;letter-spacing:.44em;text-transform:uppercase;color:rgba(28,24,16,.35);margin-bottom:4px}
+.doc-name{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.6vw,26px);font-weight:300;color:#1C1810}
+.status-pill{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;background:#1C1810;color:#8EBA6A;font-size:9px;letter-spacing:.24em;text-transform:uppercase;border-radius:2px}
+.dot{width:7px;height:7px;border-radius:50%;background:#8EBA6A;animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.2}}
+
+.ad-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid rgba(28,24,16,.1)}
+.ar{padding:12px 0 12px;border-right:1px solid rgba(28,24,16,.1)}
+.ar:last-child{border-right:none;padding-right:0}
+.ar:not(:first-child){padding-left:16px}
+.ar-tag{font-size:7px;letter-spacing:.4em;text-transform:uppercase;color:rgba(28,24,16,.3);margin-bottom:3px}
+.ar-title{font-family:'Cormorant Garamond',serif;font-size:clamp(13px,1.9vw,17px);font-style:italic;font-weight:300;color:#1C1810;line-height:1.2}
+
+/* TICKER */
+.ticker{height:34px;background:#1C1810;overflow:hidden;display:flex;align-items:center;flex-shrink:0}
+.ticker-inner{white-space:nowrap;font-size:10px;font-weight:200;letter-spacing:.16em;color:rgba(232,226,216,.4);padding-left:100%;animation:tick 38s linear infinite}
+.ticker-inner span{margin:0 32px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.footer{display:flex;justify-content:space-between;padding:10px 52px 16px;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(28,24,16,.25);flex-shrink:0}
+.clock{color:rgba(28,24,16,.45);font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="poster">
+    <div class="bg-word">237</div>
+
+    <div class="p-top">
+      <div class="p-logo">Мармуровий Палац<em>Marble Palace · Med</em></div>
+      <div class="p-floor">Floor<strong>02</strong></div>
+    </div>
+
+    <div class="p-mid">
+      <div class="ruled"><div class="ruled-line"></div><div class="ruled-text">Cabinet · Кабінет</div><div class="ruled-line"></div></div>
+      <div class="num-and-name">
+        <div class="room-num">237</div>
+        <div class="name-stack">
+          <div class="ns-divider"></div>
+          <div class="room-name-ua">Кабінет лікаря гінеколога</div>
+          <div class="room-name-en">Gynecologist's Office</div>
+        </div>
+      </div>
+      <div class="ruled2"><div class="ruled-line"></div><div class="ruled-text">Wing East</div><div class="ruled-line"></div></div>
+    </div>
+
+    <div class="p-bot">
+      <div class="info-strip">
+        <div><div class="doc-label">Прийом веде</div><div class="doc-name">Ковальчук І. М.</div></div>
+        <div class="status-pill"><span class="dot"></span>Вільно</div>
+      </div>
+      <div class="ad-row">
+        <div class="ar"><div class="ar-tag">SPA</div><div class="ar-title">Ритуал відновлення</div></div>
+        <div class="ar"><div class="ar-tag">Послуга</div><div class="ar-title">Колоногідротерапія</div></div>
+        <div class="ar"><div class="ar-tag">Чек-ап</div><div class="ar-title">Жіноче здоров'я</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>Реєстратура: 1 поверх, кабінет 010</span><span>·</span><span>Wi-Fi: MarblePalace_Guest</span><span>·</span><span>Гарячі напої у зоні очікування</span><span>·</span>
+      <span>Реєстратура: 1 поверх, кабінет 010</span><span>·</span><span>Wi-Fi: MarblePalace_Guest</span><span>·</span><span>Гарячі напої у зоні очікування</span><span>·</span>
+    </div>
+  </div>
+  <footer class="footer"><span>marblepalace.ua</span><span class="clock" id="clock">--:--</span></footer>
+</div>
+<script>
+function tick(){const n=new Date(),h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0'),months=['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];document.getElementById('clock').textContent=`${h}:${m} · ${n.getDate()} ${months[n.getMonth()]}`}
+tick();setInterval(tick,10000);
+</script>
+
+<!-- Variant Switcher -->
+<button id="vswBtn" aria-label="Switcher">⊞</button>
+<div id="vswPanel">
+  <div style="padding:16px 20px;border-bottom:1px solid rgba(200,180,140,.2);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(200,180,140,.6)">Варіанти дизайну</div>
+  <div style="overflow-y:auto;max-height:calc(70vh - 60px)">
+    <a href="/index.html" data-path="/index.html"><span>00</span>Оригінал</a>
+    <a href="/variants/v1-dark-luxury.html" data-path="/variants/v1-dark-luxury.html"><span>01</span>Dark Luxury</a>
+    <a href="/variants/v2-fullbleed-video.html" data-path="/variants/v2-fullbleed-video.html"><span>02</span>Full-bleed відео</a>
+    <a href="/variants/v3-split-layout.html" data-path="/variants/v3-split-layout.html"><span>03</span>Split ліво/право</a>
+    <a href="/variants/v4-ultra-minimal.html" data-path="/variants/v4-ultra-minimal.html"><span>04</span>Ultra Minimal</a>
+    <a href="/variants/v5-video-top.html" data-path="/variants/v5-video-top.html"><span>05</span>Відео зверху</a>
+    <a href="/variants/v6-sage-natural.html" data-path="/variants/v6-sage-natural.html"><span>06</span>Sage зелений</a>
+    <a href="/variants/v7-corporate-blue.html" data-path="/variants/v7-corporate-blue.html"><span>07</span>Corporate Blue</a>
+    <a href="/variants/v8-centered-video.html" data-path="/variants/v8-centered-video.html"><span>08</span>Centered відео</a>
+    <a href="/variants/v9-terracotta.html" data-path="/variants/v9-terracotta.html"><span>09</span>Terracotta</a>
+    <a href="/variants/v10-bands.html" data-path="/variants/v10-bands.html"><span>10</span>Bands смуги</a>
+    <a href="/variants/v11-editorial.html" data-path="/variants/v11-editorial.html"><span>11</span>Editorial</a>
+    <a href="/variants/v12-brutalist.html" data-path="/variants/v12-brutalist.html"><span>12</span>Brutalist</a>
+    <a href="/variants/v13-glassmorphism.html" data-path="/variants/v13-glassmorphism.html"><span>13</span>Glassmorphism</a>
+    <a href="/variants/v14-ink-paper.html" data-path="/variants/v14-ink-paper.html"><span>14</span>Ink Paper</a>
+    <a href="/variants/v15-bento.html" data-path="/variants/v15-bento.html"><span>15</span>Bento Grid</a>
+    <a href="/variants/v16-framed.html" data-path="/variants/v16-framed.html"><span>16</span>Framed рамка</a>
+    <a href="/variants/v17-neon-dark.html" data-path="/variants/v17-neon-dark.html"><span>17</span>Neon Dark</a>
+    <a href="/variants/v18-twotone.html" data-path="/variants/v18-twotone.html"><span>18</span>Two-tone</a>
+    <a href="/variants/v19-poster.html" data-path="/variants/v19-poster.html"><span>19</span>Poster</a>
+    <a href="/variants/v20-rotating-slides.html" data-path="/variants/v20-rotating-slides.html"><span>20</span>Rotating Slides</a>
+  </div>
+</div>
+<style>
+#vswBtn{position:fixed;bottom:72px;right:16px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(28,22,14,.8);backdrop-filter:blur(8px);color:#C7A66B;font-size:22px;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;transition:all .2s ease;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+#vswBtn:hover{background:rgba(28,22,14,.95);transform:scale(1.05)}
+#vswPanel{position:fixed;bottom:124px;right:16px;width:260px;background:rgba(28,22,14,.95);backdrop-filter:blur(16px);border-radius:6px;z-index:99998;display:none;box-shadow:0 4px 24px rgba(0,0,0,.5)}
+#vswPanel.show{display:block}
+#vswPanel a{display:flex;align-items:center;gap:14px;padding:12px 20px;color:#E5DCC8;text-decoration:none;font-size:14px;transition:background .2s ease;border-bottom:1px solid rgba(200,180,140,.08)}
+#vswPanel a:hover{background:rgba(199,166,107,.15)}
+#vswPanel a.active{background:rgba(199,166,107,.25);color:#C7A66B}
+#vswPanel a span{display:inline-block;min-width:24px;font-size:11px;color:rgba(200,180,140,.5);font-variant-numeric:tabular-nums}
+#vswPanel a.active span{color:#C7A66B;font-weight:600}
+</style>
+<script>
+(function(){
+const btn=document.getElementById('vswBtn');
+const panel=document.getElementById('vswPanel');
+if(!btn||!panel)return;
+btn.addEventListener('click',function(e){
+  e.stopPropagation();
+  panel.classList.toggle('show');
+});
+document.addEventListener('click',function(e){
+  if(!panel.contains(e.target)&&e.target!==btn){
+    panel.classList.remove('show');
+  }
+});
+const path=location.pathname;
+document.querySelectorAll('#vswPanel a').forEach(function(a){
+  const href=a.getAttribute('data-path');
+  if(path===href||(path==='/'&&href==='/index.html')){
+    a.classList.add('active');
+  }
+});
+})();
+</script>
+
+</body>
+</html>

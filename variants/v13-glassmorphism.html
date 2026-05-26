@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>237 · Glass</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;1,200;1,300&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif}
+.screen{position:relative;width:100vw;height:100vh;display:flex;flex-direction:column}
+
+.vbg{position:fixed;inset:0;z-index:0}
+.vbg video{width:100%;height:100%;object-fit:cover}
+.vbg::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(30,44,60,.65),rgba(16,24,36,.75))}
+
+.content{position:relative;z-index:2;display:flex;flex-direction:column;height:100vh;padding:24px;gap:16px}
+
+/* GLASS MIXIN */
+.glass{background:rgba(255,255,255,.08);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.15);border-radius:2px}
+.glass-dark{background:rgba(0,0,0,.25);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:2px}
+
+/* HEADER */
+.header{display:flex;justify-content:space-between;align-items:center;padding:20px 28px;flex-shrink:0}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2.2vw,20px);font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:#fff}
+.logo-sub{font-size:8px;font-weight:200;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:4px}
+.floor-pill{padding:8px 18px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6);display:flex;align-items:baseline;gap:8px}
+.floor-pill strong{font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;font-weight:200;letter-spacing:0;color:#fff}
+
+/* HERO */
+.hero{flex:1;display:flex;flex-direction:column;justify-content:center;padding:28px 32px;min-height:0}
+.room-tag{font-size:9px;letter-spacing:.55em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:6px}
+.room-num{font-family:'Cormorant Garamond',serif;font-size:clamp(160px,26vw,320px);font-weight:200;line-height:.82;letter-spacing:-.04em;color:#fff;margin-left:-6px;text-shadow:0 8px 40px rgba(0,0,0,.3)}
+.room-name{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.8vw,44px);font-style:italic;font-weight:300;color:rgba(255,255,255,.85);margin-top:14px;line-height:1.1}
+.room-en{font-family:'Inter',sans-serif;font-style:normal;font-size:9px;letter-spacing:.38em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-top:8px}
+
+/* INFO ROW */
+.info-row{display:grid;grid-template-columns:1fr auto;gap:14px;flex-shrink:0}
+.doc-card{padding:18px 22px}
+.doc-label{font-size:8px;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.doc-name{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.6vw,26px);font-weight:300;color:#fff}
+.status-card{padding:18px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;min-width:120px}
+.status-label{font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.status-val{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7DD87A;font-weight:300}
+.dot{width:8px;height:8px;border-radius:50%;background:#7DD87A;animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* ADS */
+.ads-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;flex-shrink:0}
+.ad-card{padding:16px 20px}
+.ad-tag{font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:5px}
+.ad-title{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2.2vw,22px);font-style:italic;font-weight:300;color:#fff;line-height:1.15}
+
+/* TICKER */
+.ticker{height:38px;flex-shrink:0;display:flex;align-items:center;overflow:hidden}
+.ticker-inner{white-space:nowrap;font-size:11px;font-weight:200;letter-spacing:.14em;color:rgba(255,255,255,.4);padding-left:100%;animation:tick 38s linear infinite}
+.ticker-inner span{margin:0 36px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.footer{display:flex;justify-content:space-between;padding:10px 4px 4px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);flex-shrink:0}
+.clock{color:rgba(255,255,255,.45);font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="vbg">
+    <video src="https://videos.pexels.com/video-files/6248837/6248837-hd_1920_1080_30fps.mp4" autoplay loop muted playsinline></video>
+  </div>
+  <div class="content">
+    <div class="glass header">
+      <div><div class="logo-name">Мармуровий Палац</div><div class="logo-sub">Marble Palace · Med</div></div>
+      <div class="glass floor-pill"><span>Floor</span><strong>02</strong><span>· East</span></div>
+    </div>
+
+    <div class="glass hero">
+      <div class="room-tag">Cabinet · Кабінет</div>
+      <div class="room-num">237</div>
+      <div class="room-name">Кабінет лікаря гінеколога<span class="room-en">Gynecologist's Office</span></div>
+    </div>
+
+    <div class="info-row">
+      <div class="glass doc-card"><div class="doc-label">Прийом веде</div><div class="doc-name">Ковальчук І. М.</div></div>
+      <div class="glass status-card"><div class="status-label">Статус</div><div class="status-val"><span class="dot"></span>Вільно</div></div>
+    </div>
+
+    <div class="ads-row">
+      <div class="glass-dark ad-card"><div class="ad-tag">SPA · Травень</div><div class="ad-title">Ритуал відновлення</div></div>
+      <div class="glass-dark ad-card"><div class="ad-tag">Нова послуга</div><div class="ad-title">Колоногідротерапія</div></div>
+      <div class="glass-dark ad-card"><div class="ad-tag">Чек-ап</div><div class="ad-title">Жіноче здоров'я</div></div>
+    </div>
+
+    <div class="glass ticker">
+      <div class="ticker-inner">
+        <span>Реєстратура: 1 поверх, кабінет 010</span><span>·</span><span>Wi-Fi: MarblePalace_Guest</span><span>·</span><span>Гарячі напої у зоні очікування</span><span>·</span>
+        <span>Реєстратура: 1 поверх, кабінет 010</span><span>·</span><span>Wi-Fi: MarblePalace_Guest</span><span>·</span><span>Гарячі напої у зоні очікування</span><span>·</span>
+      </div>
+    </div>
+    <div class="footer"><span>marblepalace.ua</span><span class="clock" id="clock">--:--</span></div>
+  </div>
+</div>
+<script>
+function tick(){const n=new Date(),h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0'),months=['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];document.getElementById('clock').textContent=`${h}:${m} · ${n.getDate()} ${months[n.getMonth()]}`}
+tick();setInterval(tick,10000);
+</script>
+
+<!-- Variant Switcher -->
+<button id="vswBtn" aria-label="Switcher">⊞</button>
+<div id="vswPanel">
+  <div style="padding:16px 20px;border-bottom:1px solid rgba(200,180,140,.2);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(200,180,140,.6)">Варіанти дизайну</div>
+  <div style="overflow-y:auto;max-height:calc(70vh - 60px)">
+    <a href="/index.html" data-path="/index.html"><span>00</span>Оригінал</a>
+    <a href="/variants/v1-dark-luxury.html" data-path="/variants/v1-dark-luxury.html"><span>01</span>Dark Luxury</a>
+    <a href="/variants/v2-fullbleed-video.html" data-path="/variants/v2-fullbleed-video.html"><span>02</span>Full-bleed відео</a>
+    <a href="/variants/v3-split-layout.html" data-path="/variants/v3-split-layout.html"><span>03</span>Split ліво/право</a>
+    <a href="/variants/v4-ultra-minimal.html" data-path="/variants/v4-ultra-minimal.html"><span>04</span>Ultra Minimal</a>
+    <a href="/variants/v5-video-top.html" data-path="/variants/v5-video-top.html"><span>05</span>Відео зверху</a>
+    <a href="/variants/v6-sage-natural.html" data-path="/variants/v6-sage-natural.html"><span>06</span>Sage зелений</a>
+    <a href="/variants/v7-corporate-blue.html" data-path="/variants/v7-corporate-blue.html"><span>07</span>Corporate Blue</a>
+    <a href="/variants/v8-centered-video.html" data-path="/variants/v8-centered-video.html"><span>08</span>Centered відео</a>
+    <a href="/variants/v9-terracotta.html" data-path="/variants/v9-terracotta.html"><span>09</span>Terracotta</a>
+    <a href="/variants/v10-bands.html" data-path="/variants/v10-bands.html"><span>10</span>Bands смуги</a>
+    <a href="/variants/v11-editorial.html" data-path="/variants/v11-editorial.html"><span>11</span>Editorial</a>
+    <a href="/variants/v12-brutalist.html" data-path="/variants/v12-brutalist.html"><span>12</span>Brutalist</a>
+    <a href="/variants/v13-glassmorphism.html" data-path="/variants/v13-glassmorphism.html"><span>13</span>Glassmorphism</a>
+    <a href="/variants/v14-ink-paper.html" data-path="/variants/v14-ink-paper.html"><span>14</span>Ink Paper</a>
+    <a href="/variants/v15-bento.html" data-path="/variants/v15-bento.html"><span>15</span>Bento Grid</a>
+    <a href="/variants/v16-framed.html" data-path="/variants/v16-framed.html"><span>16</span>Framed рамка</a>
+    <a href="/variants/v17-neon-dark.html" data-path="/variants/v17-neon-dark.html"><span>17</span>Neon Dark</a>
+    <a href="/variants/v18-twotone.html" data-path="/variants/v18-twotone.html"><span>18</span>Two-tone</a>
+    <a href="/variants/v19-poster.html" data-path="/variants/v19-poster.html"><span>19</span>Poster</a>
+    <a href="/variants/v20-rotating-slides.html" data-path="/variants/v20-rotating-slides.html"><span>20</span>Rotating Slides</a>
+  </div>
+</div>
+<style>
+#vswBtn{position:fixed;bottom:72px;right:16px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(28,22,14,.8);backdrop-filter:blur(8px);color:#C7A66B;font-size:22px;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;transition:all .2s ease;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+#vswBtn:hover{background:rgba(28,22,14,.95);transform:scale(1.05)}
+#vswPanel{position:fixed;bottom:124px;right:16px;width:260px;background:rgba(28,22,14,.95);backdrop-filter:blur(16px);border-radius:6px;z-index:99998;display:none;box-shadow:0 4px 24px rgba(0,0,0,.5)}
+#vswPanel.show{display:block}
+#vswPanel a{display:flex;align-items:center;gap:14px;padding:12px 20px;color:#E5DCC8;text-decoration:none;font-size:14px;transition:background .2s ease;border-bottom:1px solid rgba(200,180,140,.08)}
+#vswPanel a:hover{background:rgba(199,166,107,.15)}
+#vswPanel a.active{background:rgba(199,166,107,.25);color:#C7A66B}
+#vswPanel a span{display:inline-block;min-width:24px;font-size:11px;color:rgba(200,180,140,.5);font-variant-numeric:tabular-nums}
+#vswPanel a.active span{color:#C7A66B;font-weight:600}
+</style>
+<script>
+(function(){
+const btn=document.getElementById('vswBtn');
+const panel=document.getElementById('vswPanel');
+if(!btn||!panel)return;
+btn.addEventListener('click',function(e){
+  e.stopPropagation();
+  panel.classList.toggle('show');
+});
+document.addEventListener('click',function(e){
+  if(!panel.contains(e.target)&&e.target!==btn){
+    panel.classList.remove('show');
+  }
+});
+const path=location.pathname;
+document.querySelectorAll('#vswPanel a').forEach(function(a){
+  const href=a.getAttribute('data-path');
+  if(path===href||(path==='/'&&href==='/index.html')){
+    a.classList.add('active');
+  }
+});
+})();
+</script>
+
+</body>
+</html>

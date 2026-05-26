@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>237 · Terracotta</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=DM+Serif+Display:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#F5EEE6;font-family:'Inter',sans-serif;color:#2C1E14}
+.screen{display:flex;flex-direction:column;width:100vw;height:100vh}
+
+.header{display:flex;justify-content:space-between;align-items:center;padding:32px 52px 26px;flex-shrink:0;border-bottom:2px solid #C47A5A}
+.logo-name{font-family:'DM Serif Display',serif;font-size:clamp(16px,2.4vw,22px);color:#7A3C1E;letter-spacing:.04em}
+.logo-sub{font-size:9px;font-weight:200;letter-spacing:.38em;text-transform:uppercase;color:rgba(122,60,30,.5);margin-top:4px}
+.floor-circle{width:56px;height:56px;border-radius:50%;background:#7A3C1E;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.floor-circle .fl{font-size:7px;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,238,230,.5);font-weight:200}
+.floor-circle .fn{font-family:'DM Serif Display',serif;font-size:22px;color:#F5EEE6;font-style:italic;line-height:1}
+
+/* VIDEO embedded in hero */
+.hero{flex:1;position:relative;overflow:hidden;min-height:0}
+.hero video{width:100%;height:100%;object-fit:cover}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(44,30,20,.4) 0%,rgba(44,30,20,.2) 50%,rgba(245,238,230,1) 100%)}
+.hero-num{position:absolute;bottom:-16px;left:52px;z-index:2}
+.room-tag{font-size:8px;letter-spacing:.55em;text-transform:uppercase;color:rgba(245,238,230,.75);margin-bottom:2px}
+.room-num{font-family:'DM Serif Display',serif;font-size:clamp(130px,22vw,260px);font-style:italic;font-weight:400;line-height:.8;color:#F5EEE6;text-shadow:0 4px 30px rgba(0,0,0,.25)}
+
+.main{padding:28px 52px 0;flex-shrink:0}
+.room-name{font-family:'DM Serif Display',serif;font-size:clamp(26px,4vw,46px);font-style:italic;color:#2C1E14;line-height:1.1}
+.room-en{font-family:'Inter',sans-serif;font-style:normal;font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:#A06040;display:block;margin-top:8px}
+.sep{display:flex;align-items:center;gap:12px;margin:20px 0}
+.sep-line{flex:1;height:1px;background:rgba(44,30,20,.15)}
+.sep-dot{width:5px;height:5px;border-radius:50%;background:#C47A5A;flex-shrink:0}
+
+.info-row{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}
+.doctor-block{}
+.doc-label{font-size:8px;letter-spacing:.44em;text-transform:uppercase;color:#A06040;margin-bottom:5px}
+.doc-name{font-family:'DM Serif Display',serif;font-size:clamp(18px,2.6vw,26px);color:#2C1E14}
+.status-pill{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;background:#7A3C1E;color:#F5EEE6;font-size:10px;letter-spacing:.24em;text-transform:uppercase;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:#F5EEE6;animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+
+.ad-row{display:flex;gap:14px;padding:0 52px;margin-bottom:16px;flex-shrink:0}
+.ad-card{flex:1;padding:16px 20px;background:#fff;border-left:3px solid #C47A5A;position:relative;cursor:pointer}
+.ad-card.active{background:#7A3C1E}
+.ad-card-tag{font-size:7px;letter-spacing:.4em;text-transform:uppercase;color:#A06040;margin-bottom:4px;transition:.3s}
+.ad-card.active .ad-card-tag{color:rgba(245,238,230,.5)}
+.ad-card-title{font-family:'DM Serif Display',serif;font-size:clamp(14px,2vw,18px);font-style:italic;color:#2C1E14;transition:.3s;line-height:1.15}
+.ad-card.active .ad-card-title{color:#F5EEE6}
+
+.ticker{height:38px;background:#2C1E14;overflow:hidden;display:flex;align-items:center;flex-shrink:0}
+.ticker-inner{white-space:nowrap;font-size:11px;font-weight:200;letter-spacing:.14em;color:rgba(196,122,90,.7);padding-left:100%;animation:tick 38s linear infinite}
+.ticker-inner span{margin:0 36px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.footer{display:flex;justify-content:space-between;padding:12px 52px 20px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(44,30,20,.3);flex-shrink:0}
+.clock{color:#A06040;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="screen">
+  <header class="header">
+    <div><div class="logo-name">Мармуровий Палац</div><div class="logo-sub">Marble Palace · Med</div></div>
+    <div class="floor-circle"><span class="fl">Floor</span><span class="fn">02</span></div>
+  </header>
+
+  <div class="hero">
+    <video src="https://videos.pexels.com/video-files/6248837/6248837-hd_1920_1080_30fps.mp4" autoplay loop muted playsinline></video>
+    <div class="hero-num">
+      <div class="room-tag">Cabinet · Кабінет</div>
+      <div class="room-num">237</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="room-name">Кабінет лікаря гінеколога<span class="room-en">Gynecologist's Office</span></div>
+    <div class="sep"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+    <div class="info-row">
+      <div class="doctor-block"><div class="doc-label">Прийом веде</div><div class="doc-name">Ковальчук І. М.</div></div>
+      <div class="status-pill"><span class="dot"></span>Вільно</div>
+    </div>
+  </div>
+
+  <div class="ad-row">
+    <div class="ad-card active" id="ad0"><div class="ad-card-tag">SPA · Травень</div><div class="ad-card-title">Ритуал відновлення</div></div>
+    <div class="ad-card" id="ad1"><div class="ad-card-tag">Нова послуга</div><div class="ad-card-title">Колоногідротерапія</div></div>
+    <div class="ad-card" id="ad2"><div class="ad-card-tag">Чек-ап</div><div class="ad-card-title">Жіноче здоров'я</div></div>
+  </div>
+
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>Реєстратура: 1 поверх, кабінет 010</span><span>·</span><span>Wi-Fi: MarblePalace_Guest</span><span>·</span><span>Гарячі напої у зоні очікування</span><span>·</span>
+      <span>Реєстратура: 1 поверх, кабінет 010</span><span>·</span><span>Wi-Fi: MarblePalace_Guest</span><span>·</span><span>Гарячі напої у зоні очікування</span><span>·</span>
+    </div>
+  </div>
+  <footer class="footer"><span>marblepalace.ua</span><span class="clock" id="clock">--:--</span></footer>
+</div>
+<script>
+let c=0;const cards=document.querySelectorAll('.ad-card');
+setInterval(()=>{cards[c].classList.remove('active');c=(c+1)%cards.length;cards[c].classList.add('active')},6000);
+function tick(){const n=new Date(),h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0'),months=['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];document.getElementById('clock').textContent=`${h}:${m} · ${n.getDate()} ${months[n.getMonth()]}`}
+tick();setInterval(tick,10000);
+</script>
+
+<!-- Variant Switcher -->
+<button id="vswBtn" aria-label="Switcher">⊞</button>
+<div id="vswPanel">
+  <div style="padding:16px 20px;border-bottom:1px solid rgba(200,180,140,.2);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(200,180,140,.6)">Варіанти дизайну</div>
+  <div style="overflow-y:auto;max-height:calc(70vh - 60px)">
+    <a href="/index.html" data-path="/index.html"><span>00</span>Оригінал</a>
+    <a href="/variants/v1-dark-luxury.html" data-path="/variants/v1-dark-luxury.html"><span>01</span>Dark Luxury</a>
+    <a href="/variants/v2-fullbleed-video.html" data-path="/variants/v2-fullbleed-video.html"><span>02</span>Full-bleed відео</a>
+    <a href="/variants/v3-split-layout.html" data-path="/variants/v3-split-layout.html"><span>03</span>Split ліво/право</a>
+    <a href="/variants/v4-ultra-minimal.html" data-path="/variants/v4-ultra-minimal.html"><span>04</span>Ultra Minimal</a>
+    <a href="/variants/v5-video-top.html" data-path="/variants/v5-video-top.html"><span>05</span>Відео зверху</a>
+    <a href="/variants/v6-sage-natural.html" data-path="/variants/v6-sage-natural.html"><span>06</span>Sage зелений</a>
+    <a href="/variants/v7-corporate-blue.html" data-path="/variants/v7-corporate-blue.html"><span>07</span>Corporate Blue</a>
+    <a href="/variants/v8-centered-video.html" data-path="/variants/v8-centered-video.html"><span>08</span>Centered відео</a>
+    <a href="/variants/v9-terracotta.html" data-path="/variants/v9-terracotta.html"><span>09</span>Terracotta</a>
+    <a href="/variants/v10-bands.html" data-path="/variants/v10-bands.html"><span>10</span>Bands смуги</a>
+    <a href="/variants/v11-editorial.html" data-path="/variants/v11-editorial.html"><span>11</span>Editorial</a>
+    <a href="/variants/v12-brutalist.html" data-path="/variants/v12-brutalist.html"><span>12</span>Brutalist</a>
+    <a href="/variants/v13-glassmorphism.html" data-path="/variants/v13-glassmorphism.html"><span>13</span>Glassmorphism</a>
+    <a href="/variants/v14-ink-paper.html" data-path="/variants/v14-ink-paper.html"><span>14</span>Ink Paper</a>
+    <a href="/variants/v15-bento.html" data-path="/variants/v15-bento.html"><span>15</span>Bento Grid</a>
+    <a href="/variants/v16-framed.html" data-path="/variants/v16-framed.html"><span>16</span>Framed рамка</a>
+    <a href="/variants/v17-neon-dark.html" data-path="/variants/v17-neon-dark.html"><span>17</span>Neon Dark</a>
+    <a href="/variants/v18-twotone.html" data-path="/variants/v18-twotone.html"><span>18</span>Two-tone</a>
+    <a href="/variants/v19-poster.html" data-path="/variants/v19-poster.html"><span>19</span>Poster</a>
+    <a href="/variants/v20-rotating-slides.html" data-path="/variants/v20-rotating-slides.html"><span>20</span>Rotating Slides</a>
+  </div>
+</div>
+<style>
+#vswBtn{position:fixed;bottom:72px;right:16px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(28,22,14,.8);backdrop-filter:blur(8px);color:#C7A66B;font-size:22px;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;transition:all .2s ease;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+#vswBtn:hover{background:rgba(28,22,14,.95);transform:scale(1.05)}
+#vswPanel{position:fixed;bottom:124px;right:16px;width:260px;background:rgba(28,22,14,.95);backdrop-filter:blur(16px);border-radius:6px;z-index:99998;display:none;box-shadow:0 4px 24px rgba(0,0,0,.5)}
+#vswPanel.show{display:block}
+#vswPanel a{display:flex;align-items:center;gap:14px;padding:12px 20px;color:#E5DCC8;text-decoration:none;font-size:14px;transition:background .2s ease;border-bottom:1px solid rgba(200,180,140,.08)}
+#vswPanel a:hover{background:rgba(199,166,107,.15)}
+#vswPanel a.active{background:rgba(199,166,107,.25);color:#C7A66B}
+#vswPanel a span{display:inline-block;min-width:24px;font-size:11px;color:rgba(200,180,140,.5);font-variant-numeric:tabular-nums}
+#vswPanel a.active span{color:#C7A66B;font-weight:600}
+</style>
+<script>
+(function(){
+const btn=document.getElementById('vswBtn');
+const panel=document.getElementById('vswPanel');
+if(!btn||!panel)return;
+btn.addEventListener('click',function(e){
+  e.stopPropagation();
+  panel.classList.toggle('show');
+});
+document.addEventListener('click',function(e){
+  if(!panel.contains(e.target)&&e.target!==btn){
+    panel.classList.remove('show');
+  }
+});
+const path=location.pathname;
+document.querySelectorAll('#vswPanel a').forEach(function(a){
+  const href=a.getAttribute('data-path');
+  if(path===href||(path==='/'&&href==='/index.html')){
+    a.classList.add('active');
+  }
+});
+})();
+</script>
+
+</body>
+</html>
